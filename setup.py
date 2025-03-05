@@ -6,13 +6,7 @@ import sys
 
 from setuptools import setup
 
-USE_MYPYC = False
-
-if len(sys.argv) > 1 and sys.argv[1] == "--use-mypyc":
-    sys.argv.pop(1)
-    USE_MYPYC = True
-elif os.getenv("CHARSET_NORMALIZER_USE_MYPYC", None) == "1":
-    USE_MYPYC = True
+USE_MYPYC = True
 
 if USE_MYPYC:
     from mypyc.build import mypycify
@@ -21,8 +15,8 @@ if USE_MYPYC:
         [
             "src/charset_normalizer/md.py",
         ],
-        debug_level="0",
-        opt_level="3",
+        debug_level="3",
+        opt_level="0",
     )
 else:
     MYPYC_MODULES = None
